@@ -1,0 +1,15 @@
+SetChartOptions(0,chartShowArrows|chartShowDates);
+blue = (H-L)>(1.5)*ATR(20) AND C>Ref(C,-1);
+red = (H-L)>(1.5)*ATR(20) AND C<Ref(C,-1);
+green=  (H-L)<(1.5)*ATR(20) AND C>Ref(C,-1);
+
+barColor=IIf(blue ,colorBlue,IIf(red,colorRed,IIf(green,colorGreen,colorBlack)));
+Plot( C, "Close", barColor, styleNoTitle | ParamStyle("Style") | GetPriceStyle() ); 
+
+
+
+Title = EncodeColor(colorRed) +  Name() + " - " + EncodeColor(colorBlue)+ Interval(2)  +
+ "  - " + Date() +" - " +EncodeColor(colorBlue) +"Open-"+O+"  "+"High-"+H+"  "+"Low-"+L+"  "+
+"Close-"+C+"  "+ "Vol= "+ WriteVal(V,1.0)+"    "+"Lot Size "+WriteVal(RoundLotSize,1.0)+"  Margin   "+WriteVal(MarginDeposit,1.0)+"\n"+ 
+"range="+WriteVal((H-L),1.2)+"\n"+ 
+"ATR 20=  "+WriteVal(ATR(20),1.2);
